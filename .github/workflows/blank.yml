@@ -1,0 +1,17 @@
+on:
+  push:
+  workflow_dispatch: null
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: clone
+        run: |
+         git clone https://github.com/TGH131/k 
+         apt -y update && apt -y install zstd
+         zstd --ultra -22 k/ -o k.zst
+      - uses: actions/upload-artifact@v3
+        with:
+          name: k
+          path: k.zst
+          if-no-files-found: error
