@@ -9,9 +9,9 @@ jobs:
         run: |
          git clone https://github.com/TGH131/k 
          apt -y update && apt -y install zstd
-         zstd --ultra -22 k/ -o k.zst
+         tar -c -I 'zstd --ultra -22 -T0' -f k.tar.zst k/
       - uses: actions/upload-artifact@v3
         with:
           name: k
-          path: k.zst
+          path: k.tar.zst
           if-no-files-found: error
